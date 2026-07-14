@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification | Teamsource</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #28a745;
+            --primary-hover: #218838;
+            --text-dark: #222222;
+            --text-light: #666666;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--white);
+            padding: 15px 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-img {
+            height: 45px; /* Adjust based on your logo's proportion */
+            object-fit: contain;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 16px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Search Card */
+        .search-card {
+            background: var(--white);
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--primary);
+        }
+        .search-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Result Display */
+        #result {
+            text-align: left;
+            display: none;
+            padding-top: 25px;
+            margin-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .passport-img {
+            max-width: 100px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            float: right;
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+        .data-row {
+            margin: 10px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .data-row strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .error-msg {
+            color: #dc3545;
+            font-weight: 600;
+            text-align: center;
+        }
+        .loading {
+            color: var(--primary);
+            font-weight: 600;
+            text-align: center;
+        }
+        .download-btn {
+            display: block;
+            background-color: #f8f9fa;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            margin-top: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+        .download-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .feature-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .feature-item p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--white);
+            text-align: center;
+            padding: 25px;
+            margin-top: auto;
+            font-size: 13px;
+            color: var(--text-light);
+            border-top: 1px solid #eaeaea;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Logo Image: Ensure the file is named logo.png and placed in the same folder -->
+        <img src="logo.png" alt="Teamsource Logo" class="logo-img">
+        <nav>
+            <a href="https://teamsource.net" target="_blank">Home</a>
+            <a href="https://teamsource.net/services" target="_blank">Services</a>
+            <a href="https://teamsource.net/contact" target="_blank">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Global Credential Verification</h1>
+            <p>Ensure the authenticity of Teamsource graduates. Enter a valid Certificate ID below to securely retrieve the graduate's credentials and official documentation.</p>
+            
+            <div class="search-card">
+                <div class="search-row">
+                    <input type="text" id="cert_id" placeholder="Enter Certificate ID (e.g. TS-2026-001)">
+                    <button onclick="verifyCert()">Search</button>
+                </div>
+                <div id="result"></div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-item">
+                <div class="feature-icon">🛡️</div>
+                <h3>Secure & Tamper-Proof</h3>
+                <p>All records are cross-referenced directly with the official Teamsource encrypted database, preventing credential fraud.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Verification</h3>
+                <p>Employers and partners can validate student completion statuses, grades, and qualifications in milliseconds.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📄</div>
+                <h3>Direct Downloads</h3>
+                <p>View and download a high-resolution, certified PDF or Image copy of the graduate's original certificate immediately.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> Teamsource. All Rights Reserved. We Manage Your IT — So You Can Focus on Your Business.
+    </footer>
+
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function verifyCert() {
+            const certId = document.getElementById('cert_id').value;
+            const resultDiv = document.getElementById('result');
+            
+            if(!certId) { 
+                alert("Please enter a Certificate ID"); 
+                return; 
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Searching secure database...</p>';
+
+            fetch(`verify.php?cert_id=${certId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.status === 'success') {
+                        resultDiv.innerHTML = `
+                            <img src="${data.data.passport_image}" alt="Graduate Passport" class="passport-img">
+                            <div class="data-row"><strong>Student Name:</strong> <br>${data.data.student_name}</div>
+                            <div class="data-row"><strong>Course Completed:</strong> <br>${data.data.course_completed}</div>
+                            <div class="data-row"><strong>Graduation Date:</strong> <br>${data.data.graduation_date}</div>
+                            <div style="clear:both;"></div>
+                            <a href="${data.data.certificate_file}" target="_blank" class="download-btn">View Original Certificate</a>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `<p class="error-msg">${data.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<p class="error-msg">A network error occurred. Please check your connection.</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
